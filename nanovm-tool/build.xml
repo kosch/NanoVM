@@ -1,0 +1,50 @@
+<project name="nanovm-tool" basedir="." default="all">
+
+    <property name="version" value="SNAPSHOT"/>
+
+    <taskdef name="one-jar" classname="com.simontuffs.onejar.ant.OneJarTask"
+             classpath="src/main/resources/one-jar-ant-task-0.97.jar" onerror="report"/>
+
+    <target name="all" depends="clean,jar">
+    </target>
+
+    <target name="jar">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src/main/java"
+               destdir="target/classes"
+               includeAntRuntime="false"
+               target="1.5"
+                debug="true">
+            <classpath>
+                <fileset dir="src/main/resources" includes="*.jar"/>
+		<fileset dir="../nanovm-api/target" includes="*.jar"/> 
+           </classpath>
+        </javac>
+        <jar destfile="target/nanovm-tool-${version}.jar">
+            <fileset dir="target/classes"/>
+            <zipfileset dir=".." includes="LICENSE.txt" prefix="META-INF/"/>
+        </jar>
+
+        <one-jar destfile="target/nanovm-cli-${version}.jar">
+            <manifest>
+                <attribute name="One-Jar-Main-Class" value="org.nanovm.CLI"/>
+            </manifest>
+            <main />
+            <lib>
+                <fileset file="../nanovm-api/target/nanovm-api-${version}.jar"/>
+                <fileset file="target/nanovm-tool-${version}.jar"/>
+                <fileset dir="src/main/resources" includes="*.jar" excludes="one-jar*"/>
+            </lib>
+<!--
+            <binlib>
+                <fileset dir="src/main/resources/binlib"/>
+            </binlib>
+            -->
+        </one-jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+</project>

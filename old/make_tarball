@@ -1,0 +1,59 @@
+#!/bin/bash
+
+VMSRC="nanovm/vm/src/Makefile nanovm/vm/src/*.h nanovm/vm/src/*.c nanovm/vm/src/*/*.h nanovm/vm/src/*/*.c nanovm/vm/src/*/Makefile"
+
+VMBUILD="nanovm/vm/build/*/Makefile nanovm/vm/build/*/config.h nanovm/vm/build/*/*.txt nanovm/vm/build/*/*.hex nanovm/vm/build/*/*/dummy"
+
+MISC="nanovm/COPYING nanovm/vm/build/ldscripts/*.x nanovm/vm/build/*.txt nanovm/java/*.txt"
+
+NATIVE="nanovm/java/nanovm/*/*.java nanovm/java/nanovm/*/*/*.java"
+
+EXAMPLES="nanovm/java/examples/*.java nanovm/java/examples/*.txt nanovm/java/examples/*/*.java nanovm/java/examples/*/*/*.java"
+
+TOOL="nanovm/tool/src/*.java nanovm/tool/src/*.mf nanovm/tool/src/Makefile nanovm/tool/NanoVMTool.jar nanovm/tool/*.txt"
+
+CONFIG="nanovm/tool/config/*.native nanovm/tool/config/*.config nanovm/tool/config/*/*.native"
+
+DOC=" nanovm/doc/*.txt nanovm/doc/schematics/*.sch nanovm/doc/schematics/*.gif nanovm/doc/racetrack.pdf"
+
+INSTALL_TOOLS="nanovm/doc/*.sh nanovm/doc/*-patches/patch*"
+
+DUMMY="nanovm/vm/build/asuro/asuro/dummy nanovm/vm/build/asuro168/asuro/dummy nanovm/vm/build/avr_mega168/avr/dummy nanovm/vm/build/avr_mega32_lcd/avr/dummy nanovm/vm/build/avr_mega8/avr/dummy nanovm/vm/build/ctbot/ctbot/dummy nanovm/vm/build/nibo/nibo/dummy nanovm/vm/build/nibo2/nibo2/dummy"
+
+JAVADOC="nanovm/doc/javadoc/*.html nanovm/doc/javadoc/Makefile nanovm/doc/javadoc/package-list nanovm/doc/javadoc/stylesheet.css nanovm/doc/javadoc/nanovm nanovm/doc/javadoc/resources"
+
+cd ..
+DATE=`date +%Y%m%d`
+touch ${DUMMY}
+
+cd nanovm/vm/build/asuro
+make
+cd ../../../..
+cd nanovm/vm/build/asuro168
+make
+cd ../../../..
+cd nanovm/vm/build/avr_mega168
+make
+cd ../../../..
+cd nanovm/vm/build/avr_mega32_lcd
+make
+cd ../../../..
+cd nanovm/vm/build/avr_mega8
+make
+cd ../../../..
+cd nanovm/vm/build/ctbot
+make
+cd ../../../..
+cd nanovm/vm/build/nibo
+make
+cd ../../../..
+cd nanovm/vm/build/nibo2
+make
+cd ../../../..
+
+cd nanovm/doc/javadoc
+make
+cd ../../..
+
+echo "********************* TAR ***************************"
+tar cfvz nanovm-${DATE}.tgz ${VMSRC} ${VMBUILD} ${MISC} ${NATIVE} ${EXAMPLES} ${TOOL} ${CONFIG} ${DOC} ${JAVADOC} ${INSTALL_TOOLS}

@@ -1,0 +1,12 @@
+#
+# LineDetector.native
+#
+
+class  nanovm/nibobee/drivers/LineDetector 37
+
+method <init>:()V 0
+method getValue:(I)I 1
+method calibrateWhite:()V 1
+method calibrateBlack:()V 2
+method setEnableIR:(Z)V 3
+method getEnableIR:()Z 4

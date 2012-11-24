@@ -1,0 +1,10 @@
+*.o
+*.d
+NanoVM.elf
+NanoVM.hex
+NanoVM_eeprom.hex
+asuro
+avr
+nibo
+nibo2
+nvmdefault.h

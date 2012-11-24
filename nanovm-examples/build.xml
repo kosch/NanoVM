@@ -1,0 +1,34 @@
+<project name="nanovm-examples" basedir="." default="all">
+
+    <property name="version" value="SNAPSHOT"/>
+
+    <target name="all" depends="clean,jar">
+    </target>
+
+    <target name="jar">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src/main/java"
+               destdir="target/classes"
+               source="1.2"
+               target="1.1"
+               includeAntRuntime="false"
+                debug="true">
+            <classpath>
+                <fileset dir="../nanovm-api/target/" includes="*.jar"/>
+            </classpath>
+        </javac>
+        <jar   destfile="target/nanovm-examples-${version}.jar"
+               basedir="target/classes">
+            <zipfileset dir=".." includes="LICENSE.txt" prefix="META-INF/"/>
+        </jar>
+        <zip   destfile="target/nanovm-examples-${version}-sources.jar"
+               basedir="src/main/java">
+            <zipfileset dir=".." includes="LICENSE.txt" prefix="META-INF/"/>
+        </zip>
+    </target>
+
+    <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+</project>

@@ -1,0 +1,8 @@
+#
+# Bot.native
+#
+
+class  nanovm/nibobee/drivers/Bot 28
+
+method <init>:()V 0
+method getSupplyVoltage:()I 1

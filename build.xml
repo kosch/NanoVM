@@ -1,0 +1,22 @@
+<project name="nanovm" default="all">
+
+    <property name="version" value="1.7"/>
+
+    <target name="all" depends="clean">
+        <ant dir="nanovm-api" target="all"/>
+        <ant dir="nanovm-examples" target="all"/>
+        <ant dir="nanovm-tool" target="all"/>
+        <!-- ATM just for the homepage :-o -->
+        <exec executable="mvn">
+            <arg value="site"/>
+        </exec>
+    </target>
+
+    <target name="clean">
+        <ant dir="nanovm-api" target="clean"/>
+        <ant dir="nanovm-examples" target="clean"/>
+        <ant dir="nanovm-tool" target="clean"/>
+        <delete dir="target"/>
+    </target>
+
+</project>

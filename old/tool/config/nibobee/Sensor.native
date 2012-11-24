@@ -1,0 +1,9 @@
+#
+# Sensor.native
+#
+
+class  nanovm/nibobee/drivers/Sensor 31
+
+method <init>:()V 0
+method getLeft:()I 1
+method getRight:()I 2

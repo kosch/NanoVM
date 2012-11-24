@@ -1,0 +1,10 @@
+#
+# Leds.native
+#
+
+class  nanovm/nibobee/drivers/Leds 35
+
+method <init>:()V 0
+method setStatus:(IZ)V 1
+method getStatus:(I)Z 2
+

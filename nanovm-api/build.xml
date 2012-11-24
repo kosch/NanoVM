@@ -1,0 +1,36 @@
+<project name="nanovm-api" basedir="." default="all">
+
+    <property name="version" value="SNAPSHOT"/>
+
+    <target name="all" depends="clean,jar,javadoc">
+    </target>
+
+    <target name="jar">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src/main/java"
+               destdir="target/classes"
+               source="1.5"
+               target="1.5"
+               includeAntRuntime="false"/>
+        <copy todir="target/classes">
+            <fileset dir="src/main/java" includes="**/*.native"/>
+        </copy>
+        <jar   destfile="target/nanovm-api-${version}.jar"
+               basedir="target/classes">
+            <zipfileset dir=".." includes="LICENSE.txt" prefix="META-INF/"/>
+        </jar>
+    </target>
+
+    <target name="javadoc">
+        <javadoc sourcepath="src/main/java"
+                 destdir="target/apidocs"
+                 private="false"/>
+        <zip destfile="target/nanovm-api-${version}-javadoc.jar"
+             basedir="target/apidocs"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+</project>
